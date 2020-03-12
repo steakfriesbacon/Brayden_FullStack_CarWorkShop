@@ -1,4 +1,5 @@
 ﻿using System;
+using CarWorkShop.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -28,8 +29,11 @@ namespace CarWorkShop.Models.DB
         public virtual DbSet<OrderStatus> OrderStatus { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Review> Review { get; set; }
-
-  
+         
+        //Custom viewmodels
+        public virtual DbSet<CatalogViewModel> CatalogViewModel { get; set; }
+        public virtual DbSet<OrderDetailsQueryForCart> OrderDetailsQueryForCart { get; set; }
+        public virtual DbSet<GrandTotalViewModel> GrandTotalViewModel { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -32,6 +32,8 @@ namespace CarWorkShop
             services.AddDbContext<F201_Brayden_ProjectContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+            services.AddSession();
+
 
            
 
@@ -56,8 +58,16 @@ namespace CarWorkShop
 
             app.UseRouting();
 
+        
+
             app.UseAuthentication();
             app.UseAuthorization();
+
+            // Not working use MVC is obselete, use USE endpoints instead
+            // blah blah blah 
+            // dont know how to do it yet
+            // ok bye
+          
 
             app.UseEndpoints(endpoints =>
             {
