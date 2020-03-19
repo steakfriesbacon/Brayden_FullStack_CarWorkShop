@@ -19,11 +19,68 @@ namespace CarWorkShop.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? pageNumber)
+
         {
-            var f201_Brayden_ProjectContext = _context.Product.Include(p => p.Category);
-            return View(await f201_Brayden_ProjectContext.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
+            ViewData["UnitCostSortParm"] = sortOrder == "UnitCost" ? "unitCost_desc" : "UnitCost";
+
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+
+            ViewData["CurrentFilter"] = searchString;
+
+
+            var products = from s in _context.Product
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(s => s.Name.Contains(searchString)
+                                       || s.Description.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "Name_desc":
+                    products = products.OrderByDescending(s => s.Name);
+                    break;
+                case "UnitCost":
+                    products = products.OrderBy(s => s.UnitCost);
+                    break;
+                case "unitCost_desc":
+                    products = products.OrderByDescending(s => s.UnitCost);
+                    break;
+                default:
+                    products = products.OrderBy(s => s.Name);
+                    break;
+            }
+            int pageSize = 3;
+            return View(await PaginatedList<Product>.CreateAsync(products.AsNoTracking(), pageNumber ?? 1, pageSize));
+
         }
+
+
+
+
+
+
+
+
+
+
 
         // GET: Products/Details/5
         public async Task<IActionResult> Details(string id)

@@ -32,7 +32,7 @@ namespace CarWorkShop
             services.AddDbContext<F201_Brayden_ProjectContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddSession();
+
 
 
            
@@ -57,6 +57,7 @@ namespace CarWorkShop
             app.UseStaticFiles();
 
             app.UseRouting();
+
 
         
 

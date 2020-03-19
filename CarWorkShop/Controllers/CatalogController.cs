@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CarWorkShop.Models.DB;
 using Microsoft.EntityFrameworkCore;
+using System.Collections;
 
 namespace CarWorkShop.Controllers
 {
@@ -21,9 +22,10 @@ namespace CarWorkShop.Controllers
         public IActionResult Index()
         {
             
-            string SQL = "SELECT ProductId, Product.CategoryId AS CategoryId, Name, ImageFileName, UnitCost"
+            string SQL = "SELECT TOP 10 ProductId, Product.CategoryId AS CategoryId, Name, ImageFileName, UnitCost"
                 + ", SUBSTRING(Description, 1, 100) + '...' AS Description, CategoryName "
-                + "FROM Product INNER JOIN Category ON Product.CategoryId = Category.CategoryId ";
+                + "FROM Product" + " INNER JOIN Category ON Product.CategoryId = Category.CategoryId";
+
             string categoryName = Request.Query["CategoryName"];
 
             if (categoryName != null)
@@ -35,17 +37,77 @@ namespace CarWorkShop.Controllers
                     return BadRequest(); // Http status code 400
                 }
 
-                //140903 JPC  Passed the above test so extend SQL
-                //150807 JPC Security improvement @p0
+
                 SQL += " WHERE CategoryName = @p0";
-                //SQL += " WHERE CategoryName = '{0}'";
-                //SQL = String.Format(SQL, CategoryName);
-                //Send extra info to the view that this is the selected CategoryName
+
                 ViewBag.CategoryName = categoryName;
             }
 
             
-            //Error, Changed from "FromSql" to "FromSqlRaw" as the previous is obselete. Brayden Roberts 10/09/19
+            //Error, Changed from "FromSql" to "FromSqlRaw" as the previous is obselete.
+            //Brayden Roberts 10/09/19
+            var products = _context.CatalogViewModel.FromSqlRaw(SQL, categoryName);
+            return View(products.ToList());
+        }
+
+
+        public IActionResult Index2()
+        {
+
+            string SQL = "SELECT TOP 5 ProductId, Product.CategoryId AS CategoryId, Name, ImageFileName, UnitCost"
+                + ", SUBSTRING(Description, 1, 100) + '...' AS Description, CategoryName "
+                + "FROM Product" +
+                " INNER JOIN Category ON Product.CategoryId = Category.CategoryId";
+            string categoryName = Request.Query["CategoryName"];
+
+            if (categoryName != null)
+            {
+
+                if (categoryName.Length > 20 || categoryName.IndexOf("'") > -1 || categoryName.IndexOf("#") > -1)
+                {
+                    //TODO Code to log this event and send alert email to admin
+                    return BadRequest(); // Http status code 400
+                }
+
+                SQL += " WHERE CategoryName = @p0";
+                ViewBag.CategoryName = categoryName;
+            }
+
+
+            //Error, Changed from "FromSql" to "FromSqlRaw" as the previous is obselete.
+            //Brayden Roberts 10/09/19
+            var products = _context.CatalogViewModel.FromSqlRaw(SQL, categoryName);
+            return View(products.ToList());
+            
+            
+        }
+
+
+        public IActionResult Index3()
+        {
+
+            string SQL = "SELECT TOP 2 ProductId, Product.CategoryId AS CategoryId, Name, ImageFileName, UnitCost"
+                + ", SUBSTRING(Description, 1, 100) + '...' AS Description, CategoryName "
+                + "FROM Product INNER JOIN Category ON Product.CategoryId = Category.CategoryId"
+                ;
+            string categoryName = Request.Query["CategoryName"];
+
+            if (categoryName != null)
+            {
+
+                if (categoryName.Length > 20 || categoryName.IndexOf("'") > -1 || categoryName.IndexOf("#") > -1)
+                {
+                    //TODO Code to log this event and send alert email to admin
+                    return BadRequest(); // Http status code 400
+                }
+
+                SQL += " WHERE CategoryName = @p0";
+                ViewBag.CategoryName = categoryName;
+            }
+
+
+            //Error, Changed from "FromSql" to "FromSqlRaw" as the previous is obselete.
+            //Brayden Roberts 10/09/19
             var products = _context.CatalogViewModel.FromSqlRaw(SQL, categoryName);
             return View(products.ToList());
         }

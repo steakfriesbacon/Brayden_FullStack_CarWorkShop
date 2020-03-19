@@ -1,0 +1,99 @@
+﻿@{
+    ViewData["Title"] = "Gallery2";
+}
+
+
+
+<h1>Gallery</h1>
+
+
+
+<link rel="stylesheet" type="text/css" href="~/css/portfolioCards.css">
+
+
+<body>
+
+    <!-- MAIN (Center website) -->
+    <div class="main">
+
+        <!--<h1>MYLOGO.COM</h1>
+        <hr>-->
+
+
+        <p>Portfolio of Roberts Customs collection of Cars and Parts.</p>
+
+        <!-- Portfolio Gallery Grid -->
+        <div class="row">
+            <div class="column">
+                <div class="content">
+                    <img src="~/portfolioImages/" alt="350z" style="width:100%;height:50%">
+                    <h3>350z Fairlady 2005</h3>
+                    <p>Lorem ipsum dolor sit amet, tempor prodesset eos no. Temporibus necessitatibus sea ei, at tantas oporteat nam. Lorem ipsum dolor sit amet, tempor prodesset eos no.</p>
+                </div>
+            </div>
+            <div class="column">
+                <div class="content">
+                    <img src="~/portfolioImages/350zdash.jpg" alt="350zdash" style="width:100%;height:50%">
+                    <h3>My Work</h3>
+                    <p>Lorem ipsum dolor sit amet, tempor prodesset eos no. Temporibus necessitatibus sea ei, at tantas oporteat nam. Lorem ipsum dolor sit amet, tempor prodesset eos no.</p>
+                </div>
+            </div>
+            <div class="column">
+                <div class="content">
+                    <img src="~/portfolioImages/350zMagWarehouse.jpg" alt="350zMagWarehouse" style="width:100%;height:50%">
+                    <h3>My Work</h3>
+                    <p>Lorem ipsum dolor sit amet, tempor prodesset eos no. Temporibus necessitatibus sea ei, at tantas oporteat nam. Lorem ipsum dolor sit amet, tempor prodesset eos no.</p>
+                </div>
+            </div>
+            <div class="column">
+                <div class="content">
+                    <img src="~/portfolioImages/datsun.jpg" alt="Datsun" style="width:100%;height:50%">
+                    <h3>My Work</h3>
+                    <p>Lorem ipsum dolor sit amet, tempor prodesset eos no. Temporibus necessitatibus sea ei, at tantas oporteat nam. Lorem ipsum dolor sit amet, tempor prodesset eos no.</p>
+                </div>
+            </div>
+            <!-- END GRID -->
+        </div>
+
+
+    </div>
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" href="@Url.Action("Gallery")">&laquo;</a>
+        </li>
+        <li class="page-item active">
+            <a class="page-link" href="@Url.Action("Gallery")">1</a>
+        </li>
+        <li class="page-item disabled">
+            <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="#">3</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="#">4</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="#">5</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="#">&raquo;</a>
+        </li>
+    </ul>
+</div>

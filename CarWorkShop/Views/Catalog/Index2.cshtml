@@ -1,4 +1,9 @@
-﻿@model IEnumerable<CarWorkShop.ViewModels.CatalogViewModel>
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<CarWorkShop.ViewModels.CatalogViewModel>
 
 @{
 
@@ -56,7 +61,7 @@
                 </td>
             </tr>
         </thead>
-        
+
 
     }
 
@@ -67,26 +72,26 @@
 </table>
 <div>
     <ul class="pagination">
-        <li class="page-item disabled">
-            <a class="page-link" href="#">&laquo;</a>
+        <li class="page-item">
+            <a class="page-link" href="@Url.Action("Index")">&laquo;</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="@Url.Action("Index")">1</a>
         </li>
         <li class="page-item active">
-            <a class="page-link" href="#">1</a>
-        </li>
-        <li class="page-item">
             <a class="page-link" href="@Url.Action("Index2")">2</a>
         </li>
-        <li class="page-item">
+        <li class="page-item disabled">
             <a class="page-link" href="#">3</a>
         </li>
-        <li class="page-item">
+        <li class="page-item disabled">
             <a class="page-link" href="#">4</a>
         </li>
-        <li class="page-item">
+        <li class="page-item disabled">
             <a class="page-link" href="#">5</a>
         </li>
         <li class="page-item">
-            <a class="page-link" href="#")">&raquo;</a>
+            <a class="page-link" href="#" )">&raquo;</a>
         </li>
     </ul>
 </div>

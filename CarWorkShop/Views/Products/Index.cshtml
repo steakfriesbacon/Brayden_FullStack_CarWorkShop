@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CarWorkShop.Models.DB.Product>
+﻿@model PaginatedList<CarWorkShop.Models.DB.Product>
 
 @{
     ViewData["Title"] = "Index";
@@ -9,63 +9,89 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+
+
+
+
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Name</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ImageFileName)
+                Image
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UnitCost)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["UnitCostSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Unit Cost</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                Description
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsDownload)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DownloadFileName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
+
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageFileName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitCost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDownload)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DownloadFileName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.CategoryId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ProductId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    <img src="~/Images/Products/@item.ImageFileName" style="width:100px" />
+                </td>
+                <td>
+                    @item.UnitCost
+                </td>
+                <td>
+                    @item.Description
+                </td>
+
+                <td>
+                    @item.DownloadFileName
+                </td>
+
+                <td>
+                    <a href="~/OrderDetails/ShoppingCart?ProductId=@item.ProductId">Add&nbsp;to&nbsp;Cart</a>
+                </td>
+                <td>
+                    <a href="~/Catalog/Details?ProductId=@item.ProductId">Details</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>

@@ -1,130 +1,59 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Gallery";
 }
 
-<h1>Gallery</h1>
 
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-* {
-  box-sizing: border-box;
-}
 
-body {
-  background-color: #f1f1f1;
-  padding: 20px;
-  font-family: Arial;
-}
 
-/* Center website */
-.main {
-  max-width: 1000px;
-  margin: auto;
-}
+<link rel="stylesheet" type="text/css" href="~/css/portfolioCards.css" />
 
-h1 {
-  font-size: 50px;
-  word-break: break-all;
-}
 
-.row {
-  margin: 8px -16px;
-}
 
-/* Add padding BETWEEN each column */
-.row,
-.row > .column {
-  padding: 8px;
-}
 
-/* Create four equal columns that floats next to each other */
-.column {
-  float: left;
-  width: 25%;
-}
-
-/* Clear floats after rows */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Content */
-.content {
-  background-color: white;
-  padding: 10px;
-}
-
-/* Responsive layout - makes a two column-layout instead of four columns */
-@@media screen and (max-width: 900px) {
-  .column {
-    width: 50%;
-  }
-}
-
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-@@media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-  }
-}
-    </style>
-</head>
-<body>
-
-    <!-- MAIN (Center website) -->
-    <div class="main">
-
-        <h1>MYLOGO.COM</h1>
-        <hr>
-
-        <h2>PORTFOLIO</h2>
-        <p>Resize the browser window to see the responsive effect.</p>
+        <h1>Nissan Fairlady 350z</h1>
+        <p>Portfolio of Roberts Customs collection of Cars and Parts.</p>
 
         <!-- Portfolio Gallery Grid -->
         <div class="row">
             <div class="column">
                 <div class="content">
-                    <img src="/w3images/mountains.jpg" alt="Mountains" style="width:100%">
-                    <h3>My Work</h3>
-                    <p>Lorem ipsum dolor sit amet, tempor prodesset eos no. Temporibus necessitatibus sea ei, at tantas oporteat nam. Lorem ipsum dolor sit amet, tempor prodesset eos no.</p>
+                    <img src="~/portfolioImages/350z.jpg" alt="350z" style="width:100%;height:50%"  >
+                    <h2>History</h2>
+                    <p>Imported from Japan in 2018, this is the 2005 Nissan 350z Fairlady St. A sporty version of the fairlady.</p>
                 </div>
             </div>
             <div class="column">
                 <div class="content">
-                    <img src="/w3images/lights.jpg" alt="Lights" style="width:100%">
-                    <h3>My Work</h3>
-                    <p>Lorem ipsum dolor sit amet, tempor prodesset eos no. Temporibus necessitatibus sea ei, at tantas oporteat nam. Lorem ipsum dolor sit amet, tempor prodesset eos no.</p>
+                    <img src="~/portfolioImages/350z2.jpg" alt="350z2" style="width:100%;height:50%">
+                    <h2>Specifications</h2>
+                    <p>3.5 Litre V6 Naturally Aspirated. 280 horse-power rear wheel drive. 
+                    Being an St spec means it gets sporty leather electic seats, big brakes, gps and more power.
+                    </p>
                 </div>
             </div>
             <div class="column">
                 <div class="content">
-                    <img src="/w3images/nature.jpg" alt="Nature" style="width:100%">
-                    <h3>My Work</h3>
-                    <p>Lorem ipsum dolor sit amet, tempor prodesset eos no. Temporibus necessitatibus sea ei, at tantas oporteat nam. Lorem ipsum dolor sit amet, tempor prodesset eos no.</p>
+                    <img src="~/portfolioImages/350zCU.jpg" alt="350zCU" style="width:100%;height:50%">
+                    <h2>Problems</h2>
+                    <p>It was imported cheaply as it had a airbag light on and a broken front bumper. The bumper and airbag light were an easy fix.</p>
                 </div>
             </div>
             <div class="column">
                 <div class="content">
-                    <img src="/w3images/mountains.jpg" alt="Mountains" style="width:100%">
-                    <h3>My Work</h3>
-                    <p>Lorem ipsum dolor sit amet, tempor prodesset eos no. Temporibus necessitatibus sea ei, at tantas oporteat nam. Lorem ipsum dolor sit amet, tempor prodesset eos no.</p>
+                    <img src="~/portfolioImages/350zCU2.jpg" alt="350zCU2" style="width:100%;height:50%">
+                    <h2>Rating</h2>
+                    <p>This car is great fun for an enthusiast. It is expensive to fill up, noisy and hard to drive. Amazing fun! </p>
                 </div>
             </div>
             <!-- END GRID -->
         </div>
 
 
-    </div>
+  
 
-</body>
-</html>
+
+
 
 
 
@@ -146,7 +75,7 @@ h1 {
             <a class="page-link" href="#">1</a>
         </li>
         <li class="page-item">
-            <a class="page-link" href="#">2</a>
+            <a class="page-link" href="@Url.Action("Gallery2")">2</a>
         </li>
         <li class="page-item">
             <a class="page-link" href="#">3</a>
@@ -158,7 +87,7 @@ h1 {
             <a class="page-link" href="#">5</a>
         </li>
         <li class="page-item">
-            <a class="page-link" href="#">&raquo;</a>
+            <a class="page-link" href="@Url.Action("Gallery2")">&raquo;</a>
         </li>
     </ul>
 </div>
